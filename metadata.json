@@ -1,0 +1,7 @@
+{
+  "name": "ShifaGPT - Roleplay AI Companion",
+  "description": "A sophisticated roleplay conversation platform allowing users to engage in meaningful, human-like chats with various family and relationship personas using advanced AI.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
