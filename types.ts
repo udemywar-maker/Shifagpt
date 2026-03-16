@@ -30,6 +30,8 @@ export interface Message {
   timestamp: number;
   status?: 'sent' | 'delivered' | 'seen';
   isAudioLoading?: boolean;
+  imageBase64?: string;
+  mimeType?: string;
 }
 
 export enum ChatState {

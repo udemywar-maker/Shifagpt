@@ -33,7 +33,7 @@ const CharacterEditor: React.FC<CharacterEditorProps> = ({ character, onSave, on
     systemPrompt: character.systemPrompt || '',
     gender: character.gender || 'male',
     color: character.color || COLORS[0],
-    voiceName: character.voiceName || (character.gender === 'female' ? 'Aoede' : 'Zephyr')
+    voiceName: character.voiceName || (character.gender === 'female' ? 'Aoede' : 'Fenrir')
   });
 
   const [isPreviewing, setIsPreviewing] = useState(false);
@@ -50,7 +50,7 @@ const CharacterEditor: React.FC<CharacterEditorProps> = ({ character, onSave, on
     if (!currentVoice || currentVoice.gender !== formData.gender) {
       setFormData(prev => ({
         ...prev,
-        voiceName: formData.gender === 'female' ? 'Aoede' : 'Zephyr'
+        voiceName: formData.gender === 'female' ? 'Aoede' : 'Fenrir'
       }));
     }
   }, [formData.gender]);
@@ -108,41 +108,41 @@ const CharacterEditor: React.FC<CharacterEditorProps> = ({ character, onSave, on
   const avatarPreview = formData.avatar.trim() || `https://ui-avatars.com/api/?name=${encodeURIComponent(formData.name || 'AI')}&background=${formData.gender === 'male' ? '6366f1' : 'f43f5e'}&color=fff&size=512&bold=true`;
 
   return (
-    <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-in fade-in duration-300">
-      <div className="bg-white w-full max-w-2xl rounded-[32px] shadow-2xl overflow-hidden animate-in zoom-in-95 duration-300">
-        <div className="px-8 py-6 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
+    <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-[#050505]/80 backdrop-blur-md animate-in fade-in duration-300">
+      <div className="bg-[#0a0a0a] w-full max-w-2xl rounded-[32px] shadow-2xl overflow-hidden animate-in zoom-in-95 duration-300 border border-white/10">
+        <div className="px-8 py-6 border-b border-white/10 flex justify-between items-center bg-[#141414]">
           <div>
-            <h2 className="text-2xl font-bold text-slate-800">{isNew ? 'Create New Character' : `Customize ${formData.role || character.role}`}</h2>
-            <p className="text-xs text-slate-500">{isNew ? 'Bring a new personality to life.' : 'Tailor the persona to your preference.'}</p>
+            <h2 className="text-2xl font-serif font-bold text-white">{isNew ? 'Create New Character' : `Customize ${formData.role || character.role}`}</h2>
+            <p className="text-xs text-white/50">{isNew ? 'Bring a new personality to life.' : 'Tailor the persona to your preference.'}</p>
           </div>
-          <button onClick={onCancel} className="p-2 text-slate-400 hover:text-slate-600 transition-colors">
+          <button onClick={onCancel} className="p-2 text-white/40 hover:text-white transition-colors">
             <i className="fas fa-times text-xl"></i>
           </button>
         </div>
 
-        <form onSubmit={handleSubmit} className="p-8 space-y-6 overflow-y-auto max-h-[70vh]">
+        <form onSubmit={handleSubmit} className="p-8 space-y-6 overflow-y-auto max-h-[70vh] custom-scrollbar">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-4">
               <div>
-                <label className="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-1.5 ml-1">Name</label>
+                <label className="block text-xs font-bold text-white/40 uppercase tracking-widest mb-1.5 ml-1">Name</label>
                 <input
                   type="text"
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-2xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all font-medium"
+                  className="w-full px-4 py-3 rounded-2xl border border-white/10 bg-[#1a1a1a] text-white focus:outline-none focus:ring-1 focus:ring-white/30 focus:border-white/30 transition-all font-medium placeholder-white/20"
                   required
                   placeholder="e.g., Alex"
                 />
               </div>
               <div>
-                <label className="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-1.5 ml-1">Relationship Role</label>
+                <label className="block text-xs font-bold text-white/40 uppercase tracking-widest mb-1.5 ml-1">Relationship Role</label>
                 <input
                   type="text"
                   name="role"
                   value={formData.role}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-2xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all font-medium"
+                  className="w-full px-4 py-3 rounded-2xl border border-white/10 bg-[#1a1a1a] text-white focus:outline-none focus:ring-1 focus:ring-white/30 focus:border-white/30 transition-all font-medium placeholder-white/20"
                   required
                   placeholder="e.g., Husband"
                 />
@@ -150,25 +150,25 @@ const CharacterEditor: React.FC<CharacterEditorProps> = ({ character, onSave, on
             </div>
             <div className="space-y-4">
               <div>
-                <label className="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-1.5 ml-1">Character Gender</label>
+                <label className="block text-xs font-bold text-white/40 uppercase tracking-widest mb-1.5 ml-1">Character Gender</label>
                 <select
                   name="gender"
                   value={formData.gender}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-2xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all bg-white font-semibold"
+                  className="w-full px-4 py-3 rounded-2xl border border-white/10 bg-[#1a1a1a] text-white focus:outline-none focus:ring-1 focus:ring-white/30 focus:border-white/30 transition-all font-semibold"
                 >
                   <option value="male">Male Voice Type</option>
                   <option value="female">Female Voice Type</option>
                 </select>
               </div>
               <div>
-                <label className="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-1.5 ml-1">Voice Personality</label>
+                <label className="block text-xs font-bold text-white/40 uppercase tracking-widest mb-1.5 ml-1">Voice Personality</label>
                 <div className="flex gap-2">
                   <select
                     name="voiceName"
                     value={formData.voiceName}
                     onChange={handleChange}
-                    className="flex-1 px-4 py-3 rounded-2xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all bg-white font-semibold text-indigo-600"
+                    className="flex-1 px-4 py-3 rounded-2xl border border-white/10 bg-[#1a1a1a] text-[#c4a977] focus:outline-none focus:ring-1 focus:ring-white/30 focus:border-white/30 transition-all font-semibold"
                   >
                     {filteredVoices.map(v => (
                       <option key={v.id} value={v.id}>{v.name}</option>
@@ -177,7 +177,7 @@ const CharacterEditor: React.FC<CharacterEditorProps> = ({ character, onSave, on
                   <button
                     type="button"
                     onClick={handlePreviewVoice}
-                    className={`w-12 h-12 flex items-center justify-center rounded-2xl transition-all ${isPreviewing ? 'bg-indigo-100 text-indigo-600' : 'bg-slate-100 text-slate-500 hover:bg-indigo-50 hover:text-indigo-600'}`}
+                    className={`w-12 h-12 flex items-center justify-center rounded-2xl transition-all border border-white/10 ${isPreviewing ? 'bg-white/10 text-white' : 'bg-[#1a1a1a] text-white/50 hover:bg-white/5 hover:text-white'}`}
                     title="Test Voice"
                   >
                     <i className={`fas ${isPreviewing ? 'fa-spinner fa-spin' : 'fa-play'}`}></i>
@@ -187,28 +187,28 @@ const CharacterEditor: React.FC<CharacterEditorProps> = ({ character, onSave, on
             </div>
           </div>
 
-          <div className="flex items-center gap-4 p-4 bg-slate-50 rounded-2xl border border-dashed border-slate-200">
+          <div className="flex items-center gap-4 p-4 bg-[#141414] rounded-2xl border border-dashed border-white/20">
             <div className="relative group">
               <img 
                 src={avatarPreview} 
                 alt="Preview" 
-                className="w-16 h-16 rounded-full object-cover shadow-sm bg-white" 
+                className="w-16 h-16 rounded-full object-cover shadow-sm bg-[#1a1a1a]" 
                 onError={(e) => { (e.target as HTMLImageElement).src = `https://ui-avatars.com/api/?name=${encodeURIComponent(formData.name || 'AI')}&background=random`; }} 
               />
               {isGeneratingAvatar && (
-                <div className="absolute inset-0 flex items-center justify-center bg-white/60 rounded-full">
-                  <i className="fas fa-spinner fa-spin text-indigo-600"></i>
+                <div className="absolute inset-0 flex items-center justify-center bg-[#0a0a0a]/60 rounded-full">
+                  <i className="fas fa-spinner fa-spin text-white"></i>
                 </div>
               )}
             </div>
             <div className="flex flex-col flex-1 min-w-0">
               <div className="flex justify-between items-end mb-1">
-                <label className="text-[10px] text-slate-400 uppercase font-bold ml-1">Avatar URL</label>
+                <label className="text-[10px] text-white/40 uppercase font-bold ml-1">Avatar URL</label>
                 <button
                   type="button"
                   onClick={handleGenerateAvatar}
                   disabled={isGeneratingAvatar}
-                  className="text-[10px] font-bold text-indigo-600 hover:text-indigo-700 uppercase tracking-wider flex items-center gap-1.5 px-2 py-1 rounded-md hover:bg-indigo-50 transition-colors disabled:opacity-50"
+                  className="text-[10px] font-bold text-[#c4a977] hover:text-white uppercase tracking-wider flex items-center gap-1.5 px-2 py-1 rounded-md hover:bg-white/5 transition-colors disabled:opacity-50"
                 >
                   <i className={`fas ${isGeneratingAvatar ? 'fa-spinner fa-spin' : 'fa-wand-magic-sparkles'}`}></i>
                   {isGeneratingAvatar ? 'Generating...' : 'AI Generate'}
@@ -219,31 +219,31 @@ const CharacterEditor: React.FC<CharacterEditorProps> = ({ character, onSave, on
                 name="avatar"
                 value={formData.avatar}
                 onChange={handleChange}
-                className="w-full px-3 py-1.5 text-xs text-indigo-600 bg-white border border-slate-200 rounded-lg focus:outline-none focus:border-indigo-400"
+                className="w-full px-3 py-1.5 text-xs text-[#c4a977] bg-[#1a1a1a] border border-white/10 rounded-lg focus:outline-none focus:border-white/30 placeholder-white/20"
                 placeholder="Leave blank for auto-generated avatar"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-1.5 ml-1">AI Behavior Instructions</label>
+            <label className="block text-xs font-bold text-white/40 uppercase tracking-widest mb-1.5 ml-1">AI Behavior Instructions</label>
             <textarea
               name="systemPrompt"
               value={formData.systemPrompt}
               onChange={handleChange}
               rows={4}
-              className="w-full px-4 py-3 rounded-2xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all text-sm leading-relaxed resize-none"
+              className="w-full px-4 py-3 rounded-2xl border border-white/10 bg-[#1a1a1a] text-white focus:outline-none focus:ring-1 focus:ring-white/30 focus:border-white/30 transition-all text-sm leading-relaxed resize-none placeholder-white/20"
               placeholder="e.g., 'You are Ethan, my caring husband...'"
               required
             />
           </div>
         </form>
 
-        <div className="px-8 py-6 bg-slate-50 border-t border-slate-100 flex justify-end gap-3">
-          <button type="button" onClick={onCancel} className="px-6 py-3 rounded-2xl text-sm font-semibold text-slate-600 hover:bg-slate-200 transition-colors">
+        <div className="px-8 py-6 bg-[#141414] border-t border-white/10 flex justify-end gap-3">
+          <button type="button" onClick={onCancel} className="px-6 py-3 rounded-2xl text-sm font-semibold text-white/60 hover:bg-white/5 hover:text-white transition-colors">
             Cancel
           </button>
-          <button type="button" onClick={handleSubmit} className="px-8 py-3 rounded-2xl bg-indigo-600 text-white text-sm font-semibold shadow-lg shadow-indigo-100 hover:bg-indigo-700 active:scale-95 transition-all">
+          <button type="button" onClick={handleSubmit} className="px-8 py-3 rounded-2xl bg-white text-[#0a0a0a] text-sm font-bold shadow-lg shadow-white/10 hover:bg-gray-200 active:scale-95 transition-all">
             {isNew ? 'Create Character' : 'Save Changes'}
           </button>
         </div>

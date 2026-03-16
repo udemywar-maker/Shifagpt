@@ -87,10 +87,25 @@ export class GeminiService {
     this.sessionPrompts.delete(characterId);
   }
 
-  async *sendMessageStream(character: Character, message: string) {
+  async *sendMessageStream(character: Character, message: string, imageBase64?: string, mimeType?: string) {
     const chat = this.getChat(character);
     try {
-      const result = await chat.sendMessageStream({ message });
+      let messagePayload: any = message;
+      
+      if (imageBase64 && mimeType) {
+        messagePayload = [];
+        if (message.trim()) {
+          messagePayload.push({ text: message });
+        }
+        messagePayload.push({
+          inlineData: {
+            data: imageBase64,
+            mimeType: mimeType
+          }
+        });
+      }
+
+      const result = await chat.sendMessageStream({ message: messagePayload });
       for await (const chunk of result) {
         const c = chunk as GenerateContentResponse;
         if (c.text) yield c.text;
